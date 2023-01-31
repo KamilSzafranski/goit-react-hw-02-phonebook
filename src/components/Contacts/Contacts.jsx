@@ -1,4 +1,3 @@
-import { element } from 'prop-types';
 import React, { Component } from 'react';
 import css from './Contacts.module.css';
 import PropTypes from 'prop-types';

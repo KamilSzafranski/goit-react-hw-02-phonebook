@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Sheet } from './Sheet/Sheet';
-import { Fragment } from 'react';
 import { Contacts } from './Contacts/Contacts';
 import css from './App.module.css';
 import { nanoid } from 'nanoid';
