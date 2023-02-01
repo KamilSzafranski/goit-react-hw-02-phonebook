@@ -15,13 +15,10 @@ export class App extends Component {
     filter: '',
   };
 
-  renderFilteredData = () => {
-    return this.state.contacts.filter(element => {
-      return element.name
-        .toLowerCase()
-        .startsWith(this.state.filter.toLowerCase());
-    });
-  };
+  renderFilteredData = () =>
+    this.state.contacts.filter(element =>
+      element.name.toLowerCase().startsWith(this.state.filter.toLowerCase())
+    );
 
   inputChange = event => {
     this.setState((state, props) => {
@@ -62,7 +59,7 @@ export class App extends Component {
     };
     this.setState((state, props) => {
       return {
-        contacts: [...this.state.contacts, objectToAdd],
+        contacts: [...state.contacts, objectToAdd],
       };
     });
   };
