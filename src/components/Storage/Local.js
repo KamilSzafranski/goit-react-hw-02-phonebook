@@ -1,9 +1,6 @@
 const saveStorage = (key, data) => {
   try {
-    const localData = getStorage(key);
-    localData.push(data);
-
-    localStorage.setItem(key, JSON.stringify(localData));
+    localStorage.setItem(key, JSON.stringify(data));
   } catch (error) {
     console.log(error);
   }
@@ -11,29 +8,11 @@ const saveStorage = (key, data) => {
 
 const getStorage = key => {
   try {
-    const defaultValue = [];
-    const localData = JSON.parse(localStorage.getItem(key));
-    if (localData) {
-      return localData;
-    }
-
-    localStorage.setItem(key, JSON.stringify(defaultValue));
-    return defaultValue;
+    const localData = localStorage.getItem(key);
+    return localData === null ? [] : JSON.parse(localData);
   } catch (error) {
     console.log(error);
   }
 };
 
-const removeItemStorage = (key, data) => {
-  try {
-    const localData = getStorage(key);
-    const filteredData = localData.filter(element => element.name !== data);
-    localStorage.setItem(key, JSON.stringify(filteredData));
-
-    return filteredData;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export { saveStorage, getStorage, removeItemStorage };
+export { saveStorage, getStorage };
