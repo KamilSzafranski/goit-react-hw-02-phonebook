@@ -3,6 +3,10 @@ import css from './Contacts.module.css';
 import PropTypes from 'prop-types';
 
 export class Contacts extends Component {
+
+
+
+
   render() {
     const { data, handler, deleteItem } = this.props;
     return (

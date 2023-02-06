@@ -3,6 +3,7 @@ import { Sheet } from './Sheet/Sheet';
 import { Contacts } from './Contacts/Contacts';
 import css from './App.module.css';
 import { nanoid } from 'nanoid';
+import { getStorage, saveStorage } from './Storage/Local';
 
 export class App extends Component {
   state = {
@@ -14,6 +15,13 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    this.setState((state, pros) => {
+      console.log(getStorage('contacts'));
+      return { contacts: getStorage('contacts') };
+    });
+  }
 
   renderFilteredData = () =>
     this.state.contacts.filter(element =>
@@ -38,17 +46,14 @@ export class App extends Component {
   };
 
   addContact = event => {
-    event.preventDefault();
     const {
       name: { value: text },
       number: { value: num },
     } = event.currentTarget.elements;
-    const nameTaken = this.state.contacts.some(
-      elements => elements.name === text
-    );
-    const numberTaken = this.state.contacts.some(
-      elements => elements.number === num
-    );
+    const contactsData = getStorage('contacts');
+    event.preventDefault();
+    const nameTaken = contactsData.some(elements => elements.name === text);
+    const numberTaken = contactsData.some(elements => elements.number === num);
     if (nameTaken && numberTaken) {
       return alert(`${text} is alredy in Phonebook`);
     }
@@ -57,6 +62,9 @@ export class App extends Component {
       name: text,
       number: num,
     };
+
+    saveStorage('contacts', objectToAdd);
+
     this.setState((state, props) => {
       return {
         contacts: [...state.contacts, objectToAdd],
