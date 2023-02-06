@@ -3,7 +3,7 @@ import { Sheet } from './Sheet/Sheet';
 import { Contacts } from './Contacts/Contacts';
 import css from './App.module.css';
 import { nanoid } from 'nanoid';
-import { getStorage, saveStorage } from './Storage/Local';
+import { getStorage, saveStorage, removeItemStorage } from './Storage/Local';
 
 export class App extends Component {
   state = {
@@ -18,7 +18,6 @@ export class App extends Component {
 
   componentDidMount() {
     this.setState((state, pros) => {
-      console.log(getStorage('contacts'));
       return { contacts: getStorage('contacts') };
     });
   }
@@ -37,11 +36,10 @@ export class App extends Component {
   };
 
   deleteItem = event => {
-    const data = this.state.contacts.filter(element => {
-      return element.name !== event.target.dataset.name;
-    });
+    const deleteData = removeItemStorage('contacts', event.target.dataset.name);
+    console.log(deleteData);
     this.setState(state => {
-      return { contacts: data };
+      return { contacts: [...deleteData] };
     });
   };
 

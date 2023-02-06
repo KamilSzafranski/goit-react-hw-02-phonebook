@@ -24,18 +24,16 @@ const getStorage = key => {
   }
 };
 
-// const removeItemStorage = (key, data) => {
-//   try {
-//     const localData = localStorage.getItem(key);
+const removeItemStorage = (key, data) => {
+  try {
+    const localData = getStorage(key);
+    const filteredData = localData.filter(element => element.name !== data);
+    localStorage.setItem(key, JSON.stringify(filteredData));
 
-//     const filteredData = localData.filter(
-//       element => element.name !== data.name
-//     );
-//     localStorage.setItem(key, filteredData);
-//     return filteredData;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+    return filteredData;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export { saveStorage, getStorage };
+export { saveStorage, getStorage, removeItemStorage };
