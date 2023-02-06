@@ -49,6 +49,7 @@ export class App extends Component {
       name: { value: text },
       number: { value: num },
     } = event.currentTarget.elements;
+    event.preventDefault();
     const nameTaken = this.state.contacts.some(
       elements => elements.name === text
     );
