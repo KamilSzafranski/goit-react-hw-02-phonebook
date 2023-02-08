@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from './Contacts.module.css';
 import PropTypes from 'prop-types';
+import { ContactsItem } from 'components/ContactsItem/ContacsItem';
 
 export class Contacts extends Component {
   render() {
@@ -18,17 +19,12 @@ export class Contacts extends Component {
         <ul>
           {data.map(element => {
             return (
-              <li className={css.item} key={element.id}>
-                <span>{element.name}:</span>
-                <span> {element.number}</span>
-                <button
-                  data-name={element.name}
-                  className={css.deleteBtn}
-                  onClick={deleteItem}
-                >
-                  Delete
-                </button>
-              </li>
+              <ContactsItem
+                key={element.id}
+                name={element.name}
+                number={element.number}
+                handleDelete={deleteItem}
+              />
             );
           })}
         </ul>

@@ -17,8 +17,12 @@ export class App extends Component {
     });
   }
 
-  componentDidUpdate() {
-    saveStorage('contacts', this.state.contacts);
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.contacts.length !== this.state.contacts.length ||
+      prevState.filter.length !== this.state.filter.length
+    )
+      saveStorage('contacts', this.state.contacts);
   }
 
   renderFilteredData = () =>
